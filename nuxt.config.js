@@ -26,12 +26,13 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['normalize.css', '~assets/main.css'],
+  css: ['normalize.css', '~assets/main.scss'],
   /*
    ** Environement variables
    */
   env: {
     AUTH0_CLIENT_ID: '',
     AUTH0_CLIENT_DOMAIN: ''
-  }
+  },
+  plugins: []
 }

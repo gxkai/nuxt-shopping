@@ -1,7 +1,8 @@
 <template>
   <div>
     <a
-      href="https://github.com/nuxt/example-auth0"
+      href="https://github.com/gxkai/nuxt-shopping"
+      target="_blank"
       class="github-corner"
       aria-label="View source on Github"
     >
