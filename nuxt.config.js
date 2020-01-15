@@ -26,7 +26,8 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['normalize.css', '~assets/main.scss'],
+  css: ['normalize.css'],
+  scss: ['~assets/main.scss'],
   /*
    ** Environement variables
    */
@@ -34,5 +35,9 @@ export default {
     AUTH0_CLIENT_ID: '',
     AUTH0_CLIENT_DOMAIN: ''
   },
-  plugins: []
+  plugins: [],
+  modules: ['@nuxtjs/style-resources'],
+  styleResources: {
+    scss: ['~assets/variables.scss']
+  }
 }

@@ -18,6 +18,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import '~assets/variables.scss';
 #auth0-lock {
   form {
     width: 50%;
@@ -38,7 +39,7 @@ export default {
       font-size: 16px;
       &:last-child {
         background-color: rgba(green, 0.5);
-        color: rgba(white, 0.5);
+        color: lighten(white, 0.5);
         border: none;
       }
     }
