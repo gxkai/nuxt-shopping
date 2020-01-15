@@ -1,42 +1,72 @@
-<template>
-  <div>
-    <super-secret-div v-if="isAuthenticated" />
-    <div class="content">
-      <h1>Hello, {{ loggedUser ? loggedUser.name : 'friend' }}!</h1>
-      <p>
-        This is a super simple example of how to use
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank">Nuxt.js</a>
-        and <a href="https://auth0.com" target="_blank">Auth0</a> together.
-      </p>
-      <p v-if="!isAuthenticated">
-        You're not authenticated yet. Maybe you want to
-        <nuxt-link to="/auth/sign-in" class="link">sign in</nuxt-link> and see
-        what happens?
-      </p>
-      <p v-else>
-        Now that you're authenticated, maybe you should try going to our
-        <nuxt-link to="/secret" class="link">super secret page</nuxt-link>!
-      </p>
+<template lang="html">
+  <div class="main">
+    <h1>Hello there</h1>
+    <p>This is an example of a named views</p>
+    <ul>
+      <li>
+        <NuxtLink to="/">
+          Root
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/section">
+          Section
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/child/123">
+          Child 123
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/child/234">
+          Child 234
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/main">
+          Main page with named view in layout
+        </NuxtLink>
+      </li>
+    </ul>
+
+    <hr />
+    <div>
+      <div class="left">
+        <NuxtChild name="left" />
+      </div>
+      <div class="content">
+        <NuxtChild />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SuperSecretDiv from '~/components/SuperSecretDiv'
-
 export default {
-  components: {
-    SuperSecretDiv
-  },
-  computed: mapGetters(['isAuthenticated', 'loggedUser'])
+  name: 'Stage'
 }
 </script>
 
 <style scoped>
+.main {
+  margin: auto;
+  max-width: 420px;
+  padding: 10px;
+}
+
+.left {
+  max-width: 150px;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px;
+}
+
+.left:empty {
+  display: none;
+}
+
 .content {
-  max-width: 750px;
-  margin: 0 auto;
-  text-align: center;
+  display: inline-block;
 }
 </style>
