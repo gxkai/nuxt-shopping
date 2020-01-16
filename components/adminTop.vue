@@ -1,11 +1,11 @@
 <template>
   <div v-show="categoryList" class="header">
-    <nuxt-link to="/blog" exact>Home</nuxt-link>
+    <nuxt-link to="/admin" exact>Home</nuxt-link>
     <nuxt-link
       v-show="categoryList"
       v-for="(c, index) in categoryList"
       :key="index"
-      :to="`/blog/category/${c.id}`"
+      :to="`/admin/category/${c.id}`"
       >{{ c.title }}</nuxt-link
     >
   </div>
@@ -15,7 +15,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'BlogTop',
-  computed: mapState('console', ['categoryList']),
+  computed: mapState('admin', ['categoryList']),
   asyncData(context) {
     return {}
   },

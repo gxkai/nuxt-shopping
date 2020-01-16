@@ -1,44 +1,7 @@
 <template lang="html">
   <div class="main">
     <h1>Hello there</h1>
-    <p>This is an example of a named views</p>
-    <ul>
-      <li>
-        <NuxtLink to="/">
-          Root
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/section">
-          Section
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/child/123">
-          Child 123
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/child/234">
-          Child 234
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/main">
-          Main page with named view in layout
-        </NuxtLink>
-      </li>
-    </ul>
-
-    <hr />
-    <div>
-      <div class="left">
-        <NuxtChild name="left" />
-      </div>
-      <div class="content">
-        <NuxtChild />
-      </div>
-    </div>
+    <section></section>
   </div>
 </template>
 
@@ -48,25 +11,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .main {
   margin: auto;
-  max-width: 420px;
+  max-width: 100%;
   padding: 10px;
 }
-
-.left {
-  max-width: 150px;
-  display: inline-block;
-  vertical-align: top;
-  border: 1px;
-}
-
-.left:empty {
-  display: none;
-}
-
-.content {
-  display: inline-block;
+section {
+  background-image: linear-gradient(
+    141deg,
+    #9fb8ad 0%,
+    #1fc8db 51%,
+    #2cb5e8 75%
+  );
+  width: 100%;
+  height: 500px;
 }
 </style>

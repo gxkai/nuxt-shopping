@@ -5,36 +5,9 @@ export default {
   router: {
     middleware: 'check-auth',
     extendRoutes(routes, resolve) {
-      const indexIndex = routes.findIndex((route) => route.name === 'index')
-      const index = routes[indexIndex].children.findIndex(
-        (route) => route.name === 'index-child-id'
-      )
-      routes[indexIndex].children[index] = {
-        ...routes[indexIndex].children[index],
-        components: {
-          default: routes[indexIndex].children[index].component,
-          left: resolve(__dirname, 'components/childLeft.vue')
-        },
-        chunkNames: {
-          left: 'components/childLeft'
-        }
-      }
-      const index1 = routes[indexIndex].children.findIndex(
-        (route) => route.name === 'index-section'
-      )
-      routes[indexIndex].children[index1] = {
-        ...routes[indexIndex].children[index1],
-        components: {
-          default: routes[indexIndex].children[index1].component,
-          left: resolve(__dirname, 'components/childLeft.vue')
-        },
-        chunkNames: {
-          left: 'components/childLeft'
-        }
-      }
-      const indexIndex2 = routes.findIndex((route) => route.name === 'blog')
+      const indexIndex2 = routes.findIndex((route) => route.path === '/blog')
       const index2 = routes[indexIndex2].children.findIndex(
-        (route) => route.name === 'blog-main'
+        (route) => route.name === 'blog'
       )
       routes[indexIndex2].children[index2] = {
         ...routes[indexIndex2].children[index2],
@@ -44,6 +17,47 @@ export default {
         },
         chunkNames: {
           top: 'components/blogTop'
+        }
+      }
+      const index3 = routes[indexIndex2].children.findIndex(
+        (route) => route.name === 'blog-category-id'
+      )
+      routes[indexIndex2].children[index3] = {
+        ...routes[indexIndex2].children[index3],
+        components: {
+          default: routes[indexIndex2].children[index3].component,
+          top: resolve(__dirname, 'components/blogTop.vue')
+        },
+        chunkNames: {
+          top: 'components/blogTop'
+        }
+      }
+
+      const indexIndex3 = routes.findIndex((route) => route.path === '/admin')
+      const index4 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin'
+      )
+      routes[indexIndex3].children[index4] = {
+        ...routes[indexIndex3].children[index4],
+        components: {
+          default: routes[indexIndex3].children[index4].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
+        }
+      }
+      const index5 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin-category-id'
+      )
+      routes[indexIndex3].children[index5] = {
+        ...routes[indexIndex3].children[index5],
+        components: {
+          default: routes[indexIndex3].children[index5].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
         }
       }
     }

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>Section content</h2>
-    <p>This page does not have left panel.</p>
+    <NuxtChild name="top" />
+    <NuxtChild />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Section'
+  name: 'Admin'
 }
 </script>
 
