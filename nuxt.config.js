@@ -82,5 +82,10 @@ export default {
   modules: ['@nuxtjs/style-resources'],
   styleResources: {
     scss: ['~assets/variables.scss']
+  },
+  build: {
+    babel: {
+      plugins: ['@babel/plugin-proposal-optional-chaining']
+    }
   }
 }
