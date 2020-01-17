@@ -1,9 +1,11 @@
+require('dotenv').config()
+const BASE_URL = process.env.BASE_URL
 export default {
   /*
    ** Router config
    */
   router: {
-    middleware: 'check-auth',
+    // middleware: 'check-auth',
     extendRoutes(routes, resolve) {
       const indexIndex2 = routes.findIndex((route) => route.path === '/blog')
       const index2 = routes[indexIndex2].children.findIndex(
@@ -93,13 +95,44 @@ export default {
     AUTH0_CLIENT_DOMAIN: ''
   },
   plugins: [],
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', '@nuxtjs/auth'],
   styleResources: {
     scss: ['~assets/variables.scss']
+  },
+  auth: {
+    redirect: {
+      login: '/auth/sign-in',
+      logout: '/auth/sign-in',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: BASE_URL + '/users/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: {
+            url: BASE_URL + '/users/logout',
+            method: 'post'
+          },
+          user: {
+            url: BASE_URL + '/users/my',
+            method: 'get',
+            propertyName: 'user'
+          }
+        }
+      }
+    }
   },
   build: {
     babel: {
       plugins: ['@babel/plugin-proposal-optional-chaining']
     }
+  },
+  server: {
+    port: 9000,
+    host: '0.0.0.0'
   }
 }

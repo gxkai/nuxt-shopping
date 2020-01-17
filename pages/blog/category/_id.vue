@@ -38,6 +38,7 @@ h3 {
 }
 ul {
   li {
+    cursor: pointer;
     header {
       width: 100%;
       display: flex;
