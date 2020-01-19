@@ -99,8 +99,12 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    'bootstrap-vue/nuxt'
   ],
+  axios: {
+    baseURL: BASE_URL
+  },
   toast: {
     position: 'top-center',
     register: [
@@ -127,15 +131,15 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: BASE_URL + '/users/login',
+            url: '/users/login',
             method: 'post'
           },
           logout: {
-            url: BASE_URL + '/users/logout',
+            url: '/users/logout',
             method: 'post'
           },
           user: {
-            url: BASE_URL + '/users/me',
+            url: '/users/me',
             method: 'get'
           }
         }

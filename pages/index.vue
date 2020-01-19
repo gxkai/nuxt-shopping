@@ -1,9 +1,7 @@
 <template lang="html">
   <div class="main">
     <h1>Hello there</h1>
-    <section>
-      {{ $auth.$state }}
-    </section>
+    <section></section>
   </div>
 </template>
 
