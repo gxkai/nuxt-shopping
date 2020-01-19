@@ -4,7 +4,6 @@
       <input v-model="form.email" />
       <input v-model="form.password" type="password" />
       <input @click="login" type="button" value="登陆" />
-      {{ $store.state.auth }}
     </form>
   </div>
 </template>
@@ -26,11 +25,13 @@ export default {
   },
   methods: {
     login() {
-      this.$auth
+      return this.$auth
         .loginWith('local', {
           data: this.form
         })
-        .then(() => alert('Logged In!'))
+        .then(() => {
+          this.$toast.success('登陆成功', { duration: 3000 })
+        })
         .catch((e) => {
           alert(e)
         })

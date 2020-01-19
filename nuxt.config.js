@@ -95,7 +95,25 @@ export default {
     AUTH0_CLIENT_DOMAIN: ''
   },
   plugins: [],
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: [
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/toast'
+  ],
+  toast: {
+    position: 'top-center',
+    register: [
+      // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   styleResources: {
     scss: ['~assets/variables.scss']
   },
@@ -110,17 +128,15 @@ export default {
         endpoints: {
           login: {
             url: BASE_URL + '/users/login',
-            method: 'post',
-            propertyName: 'token'
+            method: 'post'
           },
           logout: {
             url: BASE_URL + '/users/logout',
             method: 'post'
           },
           user: {
-            url: BASE_URL + '/users/my',
-            method: 'get',
-            propertyName: 'user'
+            url: BASE_URL + '/users/me',
+            method: 'get'
           }
         }
       }

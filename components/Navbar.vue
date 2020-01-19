@@ -4,8 +4,10 @@
     <nuxt-link to="/about">About</nuxt-link>
     <nuxt-link to="/blog">Blog</nuxt-link>
     <nuxt-link to="/admin">Admin</nuxt-link>
-    <nuxt-link v-if="$auth.state.loggedIn" to="/secret">Top Secret</nuxt-link>
-    <nuxt-link v-if="!$auth.token" to="/auth/sign-in">Sign In</nuxt-link>
+    <nuxt-link v-if="$auth.$state.loggedIn" to="/secret">Top Secret</nuxt-link>
+    <nuxt-link v-if="!$auth.$state.loggedIn" to="/auth/sign-in"
+      >Sign In</nuxt-link
+    >
     <nuxt-link v-else to="/auth/sign-off">Sign Off</nuxt-link>
   </div>
 </template>
