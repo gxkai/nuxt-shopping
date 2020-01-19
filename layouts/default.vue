@@ -3,6 +3,7 @@
     <fork-this />
     <div class="main">
       <navbar />
+      <slot />
       <nuxt />
     </div>
   </div>
@@ -13,6 +14,7 @@ import Navbar from '~/components/Navbar'
 import ForkThis from '~/components/ForkThis'
 
 export default {
+  name: 'app',
   components: {
     Navbar,
     ForkThis

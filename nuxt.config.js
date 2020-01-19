@@ -62,6 +62,48 @@ export default {
           top: 'components/adminTop'
         }
       }
+
+      const index6 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin-category'
+      )
+      routes[indexIndex3].children[index6] = {
+        ...routes[indexIndex3].children[index6],
+        components: {
+          default: routes[indexIndex3].children[index6].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
+        }
+      }
+
+      const index7 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin-category-article'
+      )
+      routes[indexIndex3].children[index7] = {
+        ...routes[indexIndex3].children[index7],
+        components: {
+          default: routes[indexIndex3].children[index7].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
+        }
+      }
+
+      const index8 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin-category-article-id'
+      )
+      routes[indexIndex3].children[index8] = {
+        ...routes[indexIndex3].children[index8],
+        components: {
+          default: routes[indexIndex3].children[index8].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
+        }
+      }
     }
   },
   /*

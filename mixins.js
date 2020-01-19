@@ -1,12 +1,10 @@
 export const pageMixin = {
   data() {
     return {
-      items: [],
       fields: [],
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
-      pageOptions: [5, 10, 15],
       sortBy: '',
       sortDesc: false,
       sortDirection: 'asc',
