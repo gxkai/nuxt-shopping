@@ -76,41 +76,13 @@ export default {
           top: 'components/adminTop'
         }
       }
-
-      const index7 = routes[indexIndex3].children.findIndex(
-        (route) => route.name === 'admin-category-article'
-      )
-      routes[indexIndex3].children[index7] = {
-        ...routes[indexIndex3].children[index7],
-        components: {
-          default: routes[indexIndex3].children[index7].component,
-          top: resolve(__dirname, 'components/adminTop.vue')
-        },
-        chunkNames: {
-          top: 'components/adminTop'
-        }
-      }
-
-      const index8 = routes[indexIndex3].children.findIndex(
-        (route) => route.name === 'admin-category-article-id'
-      )
-      routes[indexIndex3].children[index8] = {
-        ...routes[indexIndex3].children[index8],
-        components: {
-          default: routes[indexIndex3].children[index8].component,
-          top: resolve(__dirname, 'components/adminTop.vue')
-        },
-        chunkNames: {
-          top: 'components/adminTop'
-        }
-      }
     }
   },
   /*
    ** Headers of the page
    */
   head: {
-    title: 'Nuxt.js + Auth0',
+    title: 'Y&K',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -136,7 +108,7 @@ export default {
     AUTH0_CLIENT_ID: '',
     AUTH0_CLIENT_DOMAIN: ''
   },
-  plugins: [],
+  plugins: ['~plugins/nuxt-quill-plugin.js'],
   modules: [
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',

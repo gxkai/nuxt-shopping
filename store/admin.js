@@ -21,9 +21,9 @@ export const actions = {
     context.commit('setCategoryList', data)
     return data
   },
-  async getArticleList(context, { categoryId }) {
+  async getArticleList(context) {
     const { data } = await this.$axios.get('/articles', {
-      params: { categoryId }
+      params: { categoryId: this.app.context.params.id }
     })
     return data
   }

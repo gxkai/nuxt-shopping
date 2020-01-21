@@ -27,30 +27,18 @@
         </b-form-group>
       </b-col>
       <b-col lg="12" class="my-2">
-        <b-button v-b-modal.modal-1 variant="primary">Add</b-button>
-        <b-modal
-          id="modal-1"
-          ref="modal"
-          @show="resetModal"
-          @ok="handleOk"
-          title="Submit Your Name"
+        <b-button
+          @click="
+            info({
+              mode: 'Add',
+              item: {},
+              index: undefined,
+              button: $event.target
+            })
+          "
+          variant="primary"
+          >Add</b-button
         >
-          <form ref="form" @submit.stop.prevent="handleSubmit">
-            <b-form-group
-              :state="nameState"
-              label="Name"
-              label-for="name-input"
-              invalid-feedback="Name is required"
-            >
-              <b-form-input
-                id="name-input"
-                v-model="form.name"
-                :state="nameState"
-                required
-              ></b-form-input>
-            </b-form-group>
-          </form>
-        </b-modal>
       </b-col>
     </b-row>
 
@@ -72,17 +60,27 @@
     >
       <template v-slot:cell(actions)="row">
         <b-button
-          @click="info(row.item, row.index, $event.target)"
+          @click="
+            info({
+              mode: 'Edit',
+              item: row.item,
+              index: row.index,
+              button: $event.target
+            })
+          "
           size="sm"
           class="mr-1"
         >
-          Info modal
+          Edit modal
         </b-button>
         <b-button @click="row.toggleDetails" size="sm">
           {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
         </b-button>
         <b-button @click="article(row)" size="sm" class="mr-1">
-          article list
+          To ArticleList
+        </b-button>
+        <b-button @click="handleDelete(row)" size="sm" class="mr-1">
+          Delete
         </b-button>
       </template>
 
@@ -110,23 +108,57 @@
     </b-row>
 
     <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal">
-      <pre>{{ infoModal.content }}</pre>
+    <b-modal
+      :id="infoModal.id"
+      :title="infoModal.title"
+      @hide="resetInfoModal(infoModal)"
+      @ok="handleOk({ infoModal, bvModalEvt: $event })"
+    >
+      <form ref="form" @submit.stop.prevent="handleSubmit({ infoModal })">
+        <b-form-group
+          label="Name"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-input
+            id="name-input"
+            v-model="infoModal.form.name"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group label="IconUrl" invalid-feedback="IconUrl is required">
+          <b-form-file
+            v-model="infoModal.form.file"
+            @input="updateFile(infoModal)"
+            accept="image/*"
+          ></b-form-file>
+          <b-img :src="infoModal.form.iconUrl" v-bind="mainProps"></b-img>
+        </b-form-group>
+      </form>
     </b-modal>
   </b-container>
 </template>
 
 <script>
-import { pageMixin } from '../../../mixins'
+import { pageMixin, libMixin } from '../../../mixins'
 export default {
-  mixins: [pageMixin],
+  mixins: [pageMixin, libMixin],
+  data() {
+    return {
+      infoModal: {
+        id: 'info-modal',
+        form: {
+          iconUrl: '',
+          file: '',
+          name: ''
+        }
+      }
+    }
+  },
   async asyncData(context) {
     const items = await context.store.dispatch('admin/getCategoryList')
     return {
       items,
-      form: {
-        name: ''
-      },
       nameState: null,
       fields: [
         {
@@ -142,44 +174,71 @@ export default {
           sortDirection: 'desc'
         },
         { key: 'actions', label: 'Actions' }
-      ]
+      ],
+      mainProps: {
+        left: true,
+        fluidGrow: false,
+        blank: false,
+        blankColor: '#bbb',
+        width: 50,
+        height: 50,
+        class: 'my-5'
+      }
     }
   },
   methods: {
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity()
-      this.nameState = valid
       return valid
     },
-    resetModal() {
-      this.form.name = ''
-      this.nameState = null
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault()
-      // Trigger submit handler
-      this.handleSubmit()
-    },
-    async handleSubmit() {
+    async handleSubmit({ infoModal }) {
       // Exit when the form isn't valid
       if (!this.checkFormValidity()) {
         return
       }
       // Push the name to submitted names
-      await this.$axios.post('/categories', this.form)
-      this.$store.dispatch('admin/getCategoryList')
+      if (infoModal.mode === 'Edit') {
+        await this.$axios.put(
+          `/categories/${infoModal.form.id}`,
+          infoModal.form
+        )
+      } else {
+        console.log(infoModal.form)
+        await this.$axios.post('/categories', infoModal.form)
+      }
+      this.items = await this.$store.dispatch('admin/getCategoryList')
       // Hide the modal manually
       this.$nextTick(() => {
-        this.$bvModal.hide('modal-1')
+        this.$bvModal.hide(infoModal.id)
       })
     },
     article(row) {
-      this.$router.push({
-        path: `/admin/category/article`,
-        query: { categoryId: row.item.id }
-      })
+      this.$router.push(`/admin/category/${row.item.id}`)
+    },
+    handleDelete(row) {
+      this.$bvModal
+        .msgBoxConfirm('Confirm delete?')
+        .then(async () => {
+          await this.$axios.delete(`/categories/${row.item.id}`)
+          this.items = await this.$store.dispatch('admin/getCategoryList')
+        })
+        .catch((err) => {
+          console.log(err)
+          // An error occurred
+        })
+    },
+    async updateFile(infoModal) {
+      if (!infoModal.form.file) {
+        return
+      }
+      const a = await this.getFileBase64(infoModal.form.file)
+      this.$set(infoModal.form, 'iconUrl', a)
     }
   }
 }
 </script>
+<style scoped>
+fieldset {
+  padding: 0;
+}
+</style>
