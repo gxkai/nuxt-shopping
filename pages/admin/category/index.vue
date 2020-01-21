@@ -203,7 +203,6 @@ export default {
           infoModal.form
         )
       } else {
-        console.log(infoModal.form)
         await this.$axios.post('/categories', infoModal.form)
       }
       this.items = await this.$store.dispatch('admin/getCategoryList')
@@ -232,6 +231,7 @@ export default {
         return
       }
       const a = await this.getFileBase64(infoModal.form.file)
+      console.log(a)
       this.$set(infoModal.form, 'iconUrl', a)
     }
   }

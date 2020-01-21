@@ -76,6 +76,35 @@ export default {
           top: 'components/adminTop'
         }
       }
+
+      const indexIndex4 = routes.findIndex((route) => route.path === '/nba')
+      const index41 = routes[indexIndex4].children.findIndex(
+        (route) => route.name === 'nba'
+      )
+      routes[indexIndex4].children[index41] = {
+        ...routes[indexIndex4].children[index41],
+        components: {
+          default: routes[indexIndex4].children[index41].component,
+          top: resolve(__dirname, 'components/nbaTop.vue')
+        },
+        chunkNames: {
+          top: 'components/nbaTop'
+        }
+      }
+      const indexIndex5 = routes.findIndex((route) => route.path === '/dota2')
+      const index51 = routes[indexIndex5].children.findIndex(
+        (route) => route.name === 'dota2'
+      )
+      routes[indexIndex5].children[index51] = {
+        ...routes[indexIndex5].children[index51],
+        components: {
+          default: routes[indexIndex5].children[index51].component,
+          top: resolve(__dirname, 'components/dota2Top.vue')
+        },
+        chunkNames: {
+          top: 'components/dota2Top'
+        }
+      }
     }
   },
   /*

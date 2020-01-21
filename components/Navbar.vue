@@ -3,6 +3,8 @@
     <nuxt-link to="/" exact>Home</nuxt-link>
     <nuxt-link to="/about">About</nuxt-link>
     <nuxt-link to="/blog">Blog</nuxt-link>
+    <nuxt-link to="/nba">NBA</nuxt-link>
+    <nuxt-link to="/dota2">DOTA2</nuxt-link>
     <nuxt-link v-if="$auth.$state.loggedIn" to="/admin">Admin</nuxt-link>
     <nuxt-link v-if="$auth.$state.loggedIn" to="/secret">Top Secret</nuxt-link>
     <nuxt-link v-if="!$auth.$state.loggedIn" to="/auth/sign-in"
