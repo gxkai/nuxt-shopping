@@ -162,12 +162,6 @@ export default {
       nameState: null,
       fields: [
         {
-          key: 'id',
-          label: 'id',
-          sortable: true,
-          sortDirection: 'desc'
-        },
-        {
           key: 'name',
           label: 'name',
           sortable: true,

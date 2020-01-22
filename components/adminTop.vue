@@ -2,6 +2,7 @@
   <div class="header">
     <nuxt-link to="/admin" exact>Home</nuxt-link>
     <nuxt-link to="/admin/category">Category</nuxt-link>
+    <nuxt-link to="/admin/script">Script</nuxt-link>
   </div>
 </template>
 

@@ -26,5 +26,13 @@ export const actions = {
       params: { categoryId: this.app.context.params.id }
     })
     return data
+  },
+  async getNbaChampionHistoryList(context) {
+    const { data } = await this.$axios.get('/nba-championship-histories')
+    return data
+  },
+  async getDota2ChampionHistoryList(context) {
+    const { data } = await this.$axios.get('/dota2champion-histories')
+    return data
   }
 }

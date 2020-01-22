@@ -1,6 +1,7 @@
 <template>
   <div class="header">
     <nuxt-link to="/dota2" exact>Home</nuxt-link>
+    <nuxt-link to="/dota2/champion-history">Champion History</nuxt-link>
   </div>
 </template>
 

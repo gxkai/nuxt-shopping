@@ -76,6 +76,19 @@ export default {
           top: 'components/adminTop'
         }
       }
+      const index7 = routes[indexIndex3].children.findIndex(
+        (route) => route.name === 'admin-script'
+      )
+      routes[indexIndex3].children[index7] = {
+        ...routes[indexIndex3].children[index7],
+        components: {
+          default: routes[indexIndex3].children[index7].component,
+          top: resolve(__dirname, 'components/adminTop.vue')
+        },
+        chunkNames: {
+          top: 'components/adminTop'
+        }
+      }
 
       const indexIndex4 = routes.findIndex((route) => route.path === '/nba')
       const index41 = routes[indexIndex4].children.findIndex(
@@ -91,6 +104,19 @@ export default {
           top: 'components/nbaTop'
         }
       }
+      const index42 = routes[indexIndex4].children.findIndex(
+        (route) => route.name === 'nba-champion-history'
+      )
+      routes[indexIndex4].children[index42] = {
+        ...routes[indexIndex4].children[index42],
+        components: {
+          default: routes[indexIndex4].children[index42].component,
+          top: resolve(__dirname, 'components/nbaTop.vue')
+        },
+        chunkNames: {
+          top: 'components/nbaTop'
+        }
+      }
       const indexIndex5 = routes.findIndex((route) => route.path === '/dota2')
       const index51 = routes[indexIndex5].children.findIndex(
         (route) => route.name === 'dota2'
@@ -99,6 +125,19 @@ export default {
         ...routes[indexIndex5].children[index51],
         components: {
           default: routes[indexIndex5].children[index51].component,
+          top: resolve(__dirname, 'components/dota2Top.vue')
+        },
+        chunkNames: {
+          top: 'components/dota2Top'
+        }
+      }
+      const index52 = routes[indexIndex5].children.findIndex(
+        (route) => route.name === 'dota2-champion-history'
+      )
+      routes[indexIndex5].children[index52] = {
+        ...routes[indexIndex5].children[index52],
+        components: {
+          default: routes[indexIndex5].children[index52].component,
           top: resolve(__dirname, 'components/dota2Top.vue')
         },
         chunkNames: {
