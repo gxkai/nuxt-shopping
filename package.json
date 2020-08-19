@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.9.3",
-    "auth0-lock": "11.8.1",
+    "auth0-lock": "11.26.3",
     "cookieparser": "^0.1.0",
     "element-ui": "^2.4.11",
     "js-cookie": "^2.2.1",
